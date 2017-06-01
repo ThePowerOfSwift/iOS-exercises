@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PropertyObserversDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="xYm-bb-KES">
+                                <rect key="frame" x="14" y="318.5" width="347" height="31"/>
+                                <connections>
+                                    <action selector="slide:" destination="BYZ-38-t0r" eventType="valueChanged" id="byU-bM-Xxk"/>
+                                </connections>
+                            </slider>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Sv-G3-COa">
+                                <rect key="frame" x="96" y="182.5" width="183" height="128"/>
+                                <color key="backgroundColor" red="0.66666674613952637" green="0.050980169326066971" blue="0.56862753629684448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xYm-bb-KES" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0h5-jf-YdD"/>
+                            <constraint firstItem="xYm-bb-KES" firstAttribute="top" secondItem="3Sv-G3-COa" secondAttribute="bottom" constant="8" symbolic="YES" id="2BE-dE-qBH"/>
+                            <constraint firstItem="xYm-bb-KES" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="LVR-vC-r0E"/>
+                            <constraint firstItem="3Sv-G3-COa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="80" id="cXB-TH-UP5"/>
+                            <constraint firstItem="xYm-bb-KES" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="d1B-tL-ihp"/>
+                            <constraint firstItem="3Sv-G3-COa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f3h-Bx-I3d"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Sv-G3-COa" secondAttribute="trailing" constant="80" id="mFN-tk-9Fb"/>
+                            <constraint firstItem="3Sv-G3-COa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-87" id="wgv-GW-kvZ"/>
+                            <constraint firstItem="xYm-bb-KES" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zIc-8S-XJh"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="f3h-Bx-I3d"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="tempView" destination="3Sv-G3-COa" id="6zN-4E-UM3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="920" y="657"/>
+        </scene>
+    </scenes>
+</document>

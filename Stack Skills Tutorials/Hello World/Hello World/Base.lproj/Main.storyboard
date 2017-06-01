@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Hello_World" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Igel01-1" translatesAutoresizingMaskIntoConstraints="NO" id="OCK-DS-Pn6">
+                                <rect key="frame" x="21" y="149" width="278" height="414"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How old is your hedgehog?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auz-gm-eAp">
+                                <rect key="frame" x="56" y="40" width="208" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your cat's age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fom-f7-jp7">
+                                <rect key="frame" x="56" y="71" width="208" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go"/>
+                                <connections>
+                                    <action selector="editingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="GAd-mS-yYg"/>
+                                    <action selector="onAgeUpdate:" destination="BYZ-38-t0r" eventType="valueChanged" id="syj-Zo-Aci"/>
+                                    <action selector="onValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="eZx-O5-gl3"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJI-Sy-GJK">
+                                <rect key="frame" x="155" y="111" width="10.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="WJI-Sy-GJK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4AR-Q0-qGJ"/>
+                            <constraint firstItem="auz-gm-eAp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="MHs-zh-ntK"/>
+                            <constraint firstItem="auz-gm-eAp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N66-RL-3Z0"/>
+                            <constraint firstItem="Fom-f7-jp7" firstAttribute="width" secondItem="auz-gm-eAp" secondAttribute="width" id="NQG-qp-zH7"/>
+                            <constraint firstItem="Fom-f7-jp7" firstAttribute="top" secondItem="auz-gm-eAp" secondAttribute="bottom" constant="10" id="VZH-vz-ujc"/>
+                            <constraint firstItem="Fom-f7-jp7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yk9-Ac-ZSi"/>
+                            <constraint firstItem="OCK-DS-Pn6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="hcr-ge-hf3"/>
+                            <constraint firstItem="WJI-Sy-GJK" firstAttribute="top" secondItem="Fom-f7-jp7" secondAttribute="bottom" constant="10" id="kQG-4l-9aI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OCK-DS-Pn6" secondAttribute="trailing" constant="5" id="tKW-mq-JFQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="OCK-DS-Pn6" secondAttribute="bottom" constant="5" id="ye6-yZ-zgh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ageLabel" destination="WJI-Sy-GJK" id="udr-cB-QUy"/>
+                        <outlet property="label" destination="auz-gm-eAp" id="pv0-vU-RH2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="31.875" y="38.028169014084504"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Igel01-1" width="600" height="414"/>
+    </resources>
+</document>
