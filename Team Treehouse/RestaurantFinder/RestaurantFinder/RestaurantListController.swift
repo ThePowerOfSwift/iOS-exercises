@@ -123,6 +123,8 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
     }
     
     func addMapAnnotations(){
+        guard let map = map else { return }
+        
         let pins: [Pin] = venues.filter { venue in
             return venue.location?.coordinate != nil
         }.map { venue in
@@ -133,7 +135,7 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
                 longitude: coordinate.longitude
             )
         }
-        let mapManager = SimpleMapManager(map, regionRadius: 300)
+        let mapManager = SimpleMapManager(map, regionRadius: 1000)
         mapManager.addPins(pinsData: pins)
         mapManager.showRegion(latitude: lastReceivedCoordinate.latitude, longitude: lastReceivedCoordinate.longitude)
     }

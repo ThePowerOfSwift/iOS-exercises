@@ -93,10 +93,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <mapView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="RZB-Iv-x7G">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="6AN-lq-7Ep">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </mapView>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="CoZ-iC-6Ge">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <subviews>
+                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OWi-dr-Lcf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        </mapView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="CoZ-iC-6Ge" firstAttribute="leading" secondItem="6AN-lq-7Ep" secondAttribute="leading" id="QT8-TK-zl9"/>
+                                <constraint firstAttribute="bottom" secondItem="CoZ-iC-6Ge" secondAttribute="bottom" id="Snc-im-t1Y"/>
+                                <constraint firstItem="CoZ-iC-6Ge" firstAttribute="top" secondItem="6AN-lq-7Ep" secondAttribute="top" id="Tai-Qe-Wgc"/>
+                                <constraint firstAttribute="trailing" secondItem="CoZ-iC-6Ge" secondAttribute="trailing" id="Ymr-Gi-Rro"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantCell" id="WCw-Qf-5nD" customClass="RestaurantCell" customModule="RestaurantFinder" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="222" width="375" height="44"/>
@@ -163,7 +180,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <outlet property="map" destination="RZB-Iv-x7G" id="czt-PC-9Gw"/>
+                        <outlet property="map" destination="OWi-dr-Lcf" id="zaA-5g-4Sc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>

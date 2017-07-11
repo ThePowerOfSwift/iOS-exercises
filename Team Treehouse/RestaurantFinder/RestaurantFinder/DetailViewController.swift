@@ -34,6 +34,7 @@ class DetailViewController: UIViewController {
     
     private func updateMap(){
         guard let venue = self.venue,
+            let map = map,
             let latitude = venue.location?.coordinate?.latitude,
             let longitude = venue.location?.coordinate?.longitude
             else { return }
