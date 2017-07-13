@@ -3,7 +3,7 @@
 //  RestaurantFinder
 //
 //  Created by Pasan Premaratne on 5/4/16.
-//  Copyright © 2016 Treehouse. All rights reserved.
+//  Copyright © 2017 Davide Callegar. All rights reserved.
 //
 
 import UIKit
@@ -12,10 +12,14 @@ import MapKit
 let DEFAULT_COORDINATE = Coordinate(latitude: 40.759106, longitude: -73.985185)
 
 class RestaurantListController: UITableViewController, UISearchBarDelegate {
-    let foursquareClient = FoursquareClient(clientID: "5O53IDZJAWB12DFHH1WFEYL2I1I3L0BTYQPHZUGJZYFL5IO4", clientSecret: "DXVEG1PDN0NMSOOZRRLJTWXTAON4RUL3GJSXAZVVEKHP40A3")
+    let foursquareClient = FoursquareClient(
+        clientID: "5O53IDZJAWB12DFHH1WFEYL2I1I3L0BTYQPHZUGJZYFL5IO4",
+        clientSecret: "DXVEG1PDN0NMSOOZRRLJTWXTAON4RUL3GJSXAZVVEKHP40A3"
+    )
     let locationManager = LocationManager()
     var lastReceivedCoordinate: Coordinate = DEFAULT_COORDINATE
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var venues: [Venue] = [] {
         didSet {
@@ -23,30 +27,48 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
             addMapAnnotations()
         }
     }
+    var mapManager: SimpleMapManager? {
+        guard let map = map else { return nil }
+        return SimpleMapManager(map, regionRadius: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        locationManager.getPermission()
-        //var firstCall = true
-        
-        locationManager.onLocationFix { [weak self] coordinate in
-            self?.lastReceivedCoordinate = coordinate
-            
-            // not very user friendly but nice to see and to debug
-            //if firstCall == true {
-            self?.updateRestaurants(withCoordinate: coordinate, query: nil)
-                //firstCall = false
-            //}
+        setupLocationManager()
+    }
+
+    private func setupLocationManager(){
+        locationManager.on(.locationFix) { [weak self] coordinate in
+            self?.lastReceivedCoordinate = coordinate as! Coordinate
+            self?.updateRestaurants(withCoordinate: coordinate as! Coordinate, query: nil)
         }
-        
+        locationManager.on(.locationError) { [weak self] error in
+            guard let uiViewController = self else { return }
+            let intError = error as! Error
+
+            SimpleAlert.default(
+                title: "Localization Error",
+                message: intError.localizedDescription
+                ).show(using: uiViewController)
+        }
+        locationManager.on(.permissionUpdate) { [weak self] status in
+            let intStatus = status as! CLAuthorizationStatus
+            guard let uiViewController = self else { return }
+
+            if intStatus == .denied {
+                SimpleAlert.default(
+                    title: "Localization Permission Required",
+                    message: "Without the permission to use your localization services, this app won't work"
+                    ).show(using: uiViewController)
+            }
+        }
+        locationManager.getPermission()
         locationManager.startListeningForLocationChanges()
-        
-        //updateRestaurants(withCoordinate: defaultCoordinate)
     }
     
     private func updateRestaurants(withCoordinate coordinate: Coordinate, query: String?){
@@ -55,7 +77,7 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
         foursquareClient.fetchRestaurantsFor(
             coordinate,
             category: .food(nil),
-            query: query
+            query: query ?? searchBar.text
             //searchRadius: ,
             //limit: ,
         ) { result in
@@ -63,7 +85,10 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
             case .success(let venues):
                 self.venues = venues
             case .failure(let error):
-                print(error)
+                SimpleAlert.default(
+                    title: "Error retrieving restaurant data",
+                    message: error.localizedDescription
+                ).show(using: self)
             }
             self.refreshControl?.endRefreshing()
         }
@@ -72,11 +97,6 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Segues
@@ -95,7 +115,6 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
     }
 
     // MARK: - Table View
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -123,7 +142,7 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
     }
     
     func addMapAnnotations(){
-        guard let map = map else { return }
+        guard let mapManager = mapManager else { return }
         
         let pins: [Pin] = venues.filter { venue in
             return venue.location?.coordinate != nil
@@ -135,14 +154,23 @@ class RestaurantListController: UITableViewController, UISearchBarDelegate {
                 longitude: coordinate.longitude
             )
         }
-        let mapManager = SimpleMapManager(map, regionRadius: 1000)
+        mapManager.removeAllPins()
         mapManager.addPins(pinsData: pins)
-        mapManager.showRegion(latitude: lastReceivedCoordinate.latitude, longitude: lastReceivedCoordinate.longitude)
+        mapManager.showRegion(
+            latitude: lastReceivedCoordinate.latitude,
+            longitude: lastReceivedCoordinate.longitude
+        )
     }
     
-    // MARK : UIBarPositioningDelegate
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("BBBBBBBBB \(searchText)")
-        //updateRestaurants(withCoordinate: lastReceivedCoordinate, query: searchText)
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            searchBar.resignFirstResponder()
+            updateRestaurants(withCoordinate: lastReceivedCoordinate, query: text)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        updateRestaurants(withCoordinate: lastReceivedCoordinate, query: nil)
     }
 }

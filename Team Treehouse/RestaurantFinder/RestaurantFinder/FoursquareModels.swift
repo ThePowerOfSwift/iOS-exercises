@@ -3,7 +3,7 @@
 //  RestaurantFinder
 //
 //  Created by Pasan Premaratne on 5/5/16.
-//  Copyright © 2016 Treehouse. All rights reserved.
+//  Copyright © 2017 Davide Callegar. All rights reserved.
 //
 
 import Foundation

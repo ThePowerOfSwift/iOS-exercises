@@ -3,12 +3,12 @@
 //  RestaurantFinder
 //
 //  Created by Pasan Premaratne on 5/4/16.
-//  Copyright © 2016 Treehouse. All rights reserved.
+//  Copyright © 2017 Davide Callegar. All rights reserved.
 //
 
 import Foundation
 
-public let TRENetworkingErrorDomain = "com.treehouse.Stormy.NetworkingError"
+public let TRENetworkingErrorDomain = "com.brokenseal.WhereIsMaFood.NetworkingError"
 
 public let MissingHTTPResponseError: Int = 10
 public let UnexpectedResponseError: Int = 20
@@ -88,7 +88,13 @@ extension APIClient {
                         completion(nil, HTTPResponse, error)
                     }
                 default:
-                    print("Received HTTP response: \(HTTPResponse.statusCode), which was not handled")
+                    completion(nil, HTTPResponse, NSError(
+                        domain: "HTTP Status Code",
+                        code: 12345,
+                        userInfo: [
+                            "statusCode": "Received HTTP response: `\(HTTPResponse.statusCode)`, which was not handled"
+                        ]
+                    ))
                 }
             }
         }) 

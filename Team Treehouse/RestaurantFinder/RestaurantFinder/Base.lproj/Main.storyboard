@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hpl-pr-UTe">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hpl-pr-UTe">
                                 <rect key="frame" x="16" y="97" width="343" height="562"/>
                             </mapView>
                             <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
@@ -94,29 +94,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="6AN-lq-7Ep">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="CoZ-iC-6Ge">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                                    <subviews>
-                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OWi-dr-Lcf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                                        </mapView>
-                                    </subviews>
-                                </stackView>
+                                <searchBar contentMode="redraw" placeholder="Filter" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6RA-ka-Q0q">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="aJ6-JC-viB"/>
+                                    </constraints>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <scopeButtonTitles>
+                                        <string>Title</string>
+                                        <string>Title</string>
+                                    </scopeButtonTitles>
+                                </searchBar>
+                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OWi-dr-Lcf">
+                                    <rect key="frame" x="0.0" y="40" width="375" height="260"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="260" id="I2g-ry-T2g"/>
+                                    </constraints>
+                                </mapView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="CoZ-iC-6Ge" firstAttribute="leading" secondItem="6AN-lq-7Ep" secondAttribute="leading" id="QT8-TK-zl9"/>
-                                <constraint firstAttribute="bottom" secondItem="CoZ-iC-6Ge" secondAttribute="bottom" id="Snc-im-t1Y"/>
-                                <constraint firstItem="CoZ-iC-6Ge" firstAttribute="top" secondItem="6AN-lq-7Ep" secondAttribute="top" id="Tai-Qe-Wgc"/>
-                                <constraint firstAttribute="trailing" secondItem="CoZ-iC-6Ge" secondAttribute="trailing" id="Ymr-Gi-Rro"/>
+                                <constraint firstItem="6RA-ka-Q0q" firstAttribute="leading" secondItem="6AN-lq-7Ep" secondAttribute="leading" id="EOT-oZ-wkX"/>
+                                <constraint firstAttribute="bottom" secondItem="OWi-dr-Lcf" secondAttribute="bottom" id="NYJ-QZ-IWJ"/>
+                                <constraint firstAttribute="trailing" secondItem="6RA-ka-Q0q" secondAttribute="trailing" id="YaW-tR-t5V"/>
+                                <constraint firstItem="6RA-ka-Q0q" firstAttribute="top" secondItem="6AN-lq-7Ep" secondAttribute="top" id="YhE-6t-ORK"/>
+                                <constraint firstItem="OWi-dr-Lcf" firstAttribute="leading" secondItem="6AN-lq-7Ep" secondAttribute="leading" id="p3V-sm-KRQ"/>
+                                <constraint firstAttribute="trailing" secondItem="OWi-dr-Lcf" secondAttribute="trailing" id="w4P-XK-tmn"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantCell" id="WCw-Qf-5nD" customClass="RestaurantCell" customModule="RestaurantFinder" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="222" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="322" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -181,11 +192,12 @@
                     </refreshControl>
                     <connections>
                         <outlet property="map" destination="OWi-dr-Lcf" id="zaA-5g-4Sc"/>
+                        <outlet property="searchBar" destination="6RA-ka-Q0q" id="6oV-cG-oKk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="709" y="-630"/>
+            <point key="canvasLocation" x="708" y="-630.13493253373315"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
